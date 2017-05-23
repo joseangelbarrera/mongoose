@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Whith mmongoDB we need create the ‘Deamon’ and the ‘Shell’
+in that exactly order.</p>
+<p>the ‘Deamon’ rund with this command
+<code>mongod --dbpath ~/data/db</code>
+this is the standar path</p>
+<p>‘Shell’ are inicializate whith
+<code>mongo</code></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>1º we require express, body-parser and mongoose</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>)
+<span class="hljs-keyword">const</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>)
+<span class="hljs-keyword">const</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mongoose'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>2º we require the Restaurant model</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> Restaurant = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./models/Restaurant'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>3º we inicialize express instance</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> app = express()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>4º we create a variable where the database is ‘test’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> urlDB = <span class="hljs-string">'mongodb://localhost:27017/test'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>5º and assign the port 3000</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> PORT = <span class="hljs-number">3000</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>7º we connect mongoose to the database</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>mongoose.connect(urlDB)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>8º We create the paramenter for use bodyparser</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.use(bodyParser.urlencoded({ <span class="hljs-attr">extended</span>: <span class="hljs-literal">false</span> }))
+app.use(bodyParser.json())</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>9ª we stablish our promise</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>mongoose.Promise = <span class="hljs-built_in">Promise</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>10ª We create our middlewere</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>in this case we want to show and hide some parameters
+for that reason we are going to use query request
+to capture the url from show, hide, page and limit</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+
+app.use(<span class="hljs-function">(<span class="hljs-params">req, res, next</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> { show, hide, page = <span class="hljs-number">1</span>, limit = <span class="hljs-number">20</span> } = req.query</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>GET <a href="http://localhost:3000/">http://localhost:3000/</a>
+restaurant/?show=name,cuisine,borough&amp;hide=_id
+if we <code>console.log(req.query)</code> from this url it returns:
+==&gt;&gt; {show: ‘name,cuisine,borough’}</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>we create a empty object to save the req.query data
+in the form we need to use into the <code>find()</code> method of mongoose.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> projection = {}
+
+
+    <span class="hljs-keyword">if</span> (show) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>we past the req.query string to the <code>split()</code> method to convert
+it into an array wich we can pass into a forEach()
+to create the object fr the <code>projection{}</code> with
+elements as {‘name’: 1}</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">const</span> fieldToShow = show.split(<span class="hljs-string">','</span>)
+        fieldToShow.forEach(<span class="hljs-function"><span class="hljs-params">field</span> =&gt;</span> projection[field] = <span class="hljs-number">1</span>)
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>same with hide but to create element as {‘name’: 0}</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (hide) {
+        <span class="hljs-keyword">const</span> fieldToShow = hide.split(<span class="hljs-string">','</span>)
+        fieldToShow.forEach(<span class="hljs-function"><span class="hljs-params">field</span> =&gt;</span> projection[field] = <span class="hljs-number">0</span>)
+    }
+
+    req.projection = projection
+    req.limit = +limit</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>here we create the number of pages we are going to skip in order </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    req.skip = limit * (page - <span class="hljs-number">1</span>)
+
+    next()
+
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>11º We create our finalpoints</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+app.get(<span class="hljs-string">'/restaurants'</span>, (req, res) =&gt; {
+
+    <span class="hljs-keyword">const</span> { projection, page = <span class="hljs-number">1</span>, limit = <span class="hljs-number">20</span>, skip = <span class="hljs-number">1</span>} = req
+    <span class="hljs-built_in">console</span>.log(req.query)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>We can use <code>Restaurant</code> just because we
+create the variable Restuurant that requires the model
+from the file <code>Restaurant.js</code> </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    Restaurant</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>we find all the elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>     .find(<span class="hljs-literal">null</span>, projection)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>we limit to 20 the elemnets to show</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>     .limit(+limit)
+     .skip(+skip)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>once we have those elements we use the json() method
+to convert the response into a json format</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>     .then(<span class="hljs-function"><span class="hljs-params">restaurants</span> =&gt;</span> {
+        res.json(restaurants)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>now if we run <code>http://localhost:3000/restaurants</code>
+on the browser we are going to revieve 20 elements
+in json format</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    })
+
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>in this case we use req.params to intercept the value
+of the url afer <code>/restaurants/</code> which will be always
+a kind of cuisine</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.get(<span class="hljs-string">'/restaurants/:cuisine'</span>, (req, res) =&gt; {
+  <span class="hljs-keyword">const</span> { projection, limit, skip } = req
+  <span class="hljs-keyword">const</span> { cuisine } = req.params
+
+  Restaurant
+        .find({ cuisine }, projection)
+        .limit(limit)
+        .skip(skip)
+        .then(<span class="hljs-function"><span class="hljs-params">restaurants</span> =&gt;</span> {
+          res.json(restaurants)
+        })
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>same that last but with borough</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.get(<span class="hljs-string">'/restaurants/:borough'</span>, (req, res) =&gt; {
+  <span class="hljs-keyword">const</span> { projection, limit, skip } = req
+  <span class="hljs-keyword">const</span> { borough } = req.params
+
+  Restaurant
+        .find({ borough }, projection)
+        .limit(limit)
+        .skip(skip)
+        .then(<span class="hljs-function"><span class="hljs-params">restaurants</span> =&gt;</span> {
+          res.json(restaurants)
+        })
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>it excludes the cuisine element on the results
+to achieve it we use the <code>$ne</code> mongoose element </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.get(<span class="hljs-string">'/restaurants/:cuisine'</span>, (req, res) =&gt; {
+  <span class="hljs-keyword">const</span> { projection, limit, skip } = req
+  <span class="hljs-keyword">const</span> { cuisine } = req.params
+
+  Restaurant
+    .find({<span class="hljs-string">'cuisine'</span>: {<span class="hljs-attr">$ne</span>: cuisine}}, projection)
+    .limit(limit)
+    .skip(skip)
+    .then(<span class="hljs-function"><span class="hljs-params">restaurants</span> =&gt;</span> {
+      res.json(restaurants)
+    })
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p> in this case we use the <code>findById</code>methos to return the result
+only one restaurant whith a exaxt id
+and we also change the route to <code>restaurant</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.get(<span class="hljs-string">'/restaurant/:id'</span>, (req, res) =&gt; {
+  <span class="hljs-keyword">const</span> { projection, limit, skip } = req
+  <span class="hljs-keyword">const</span> { id } = req.params
+
+  Restaurant
+    .findById(id, projection)
+    .limit(limit)
+    .skip(skip)
+    .then(<span class="hljs-function"><span class="hljs-params">restaurants</span> =&gt;</span> {
+      res.json(restaurants)
+    })
+})</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>6ª We listen at port 3000</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.listen(PORT)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Listening on PORT <span class="hljs-subst">${PORT}</span>`</span>)</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
