@@ -79,14 +79,15 @@ module.exports = Cat
 ```
 /* Add a Cat */
 
-  // var kitty = new Cat({ name: 'Pepe' });
+  var kitty = new Cat({ name: 'Pepe' });
 
-  // kitty.save()
-  //   .then( () => {
-  //     console.log('cat saved properly!')
-  //     mongoose.connection.close()
-  //   })
-  //   .catch( err => console.log(err) )
+    kitty.save()
+     .then( () => {
+      console.log('cat saved properly!')
+      mongoose.connection.close()
+  })
+  
+  .catch( err => console.log(err) )
 ```
 
 

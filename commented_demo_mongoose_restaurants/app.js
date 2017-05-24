@@ -33,7 +33,8 @@ mongoose.connect(urlDB)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// 9ª we stablish our promise
+// 9ª we stablish our promise in order
+// to mongoose runs in promise mode
 mongoose.Promise = Promise
 
 // 10ª We create our middlewere
