@@ -5,9 +5,8 @@ function addTask (req, res) {
     const newToDo = new toDo({ task, dateOfUpdate: +new Date(), completed })
     newToDo.save()
         .then(msg => {
-         res.redirect('/tasks')
+            res.redirect('/tasks')
             res.json(msg)
-            // console.log('all was ok')
         })
         .catch(err => {
             res.json(err)
@@ -15,6 +14,5 @@ function addTask (req, res) {
 }
 
 module.exports = addTask
-
 
 
