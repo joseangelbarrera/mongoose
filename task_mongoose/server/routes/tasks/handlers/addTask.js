@@ -7,6 +7,7 @@ function addTask (req, res) {
         .then(msg => {
             res.redirect('/tasks')
             res.json(msg)
+            // console.log('all was ok')
         })
         .catch(err => {
             res.json(err)

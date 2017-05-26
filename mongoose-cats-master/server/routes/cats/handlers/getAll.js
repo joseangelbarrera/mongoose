@@ -4,8 +4,8 @@ function getAll(req,res) {
 
   Cat.find()
     .then( cats => {
-      // res.json(cats)
-      res.render('listcats', {cats})
+      res.json(cats)
+      // res.render('listcats', {cats})
     })
 
 }

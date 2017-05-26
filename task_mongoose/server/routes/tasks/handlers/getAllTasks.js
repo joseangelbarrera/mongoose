@@ -9,5 +9,3 @@ function getAllTasks(req, res) {
 }
 
 module.exports = getAllTasks
-
-// res.render('index.pug', { toDos })
